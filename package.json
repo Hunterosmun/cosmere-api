@@ -5,9 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "bun --hot server/index.ts",
-    "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:seed": "bun server/seed.ts"
+    "db:seed": "rm data.db && drizzle-kit push && bun server/seed.ts"
   },
   "devDependencies": {
     "@libsql/client": "^0.15.7",
