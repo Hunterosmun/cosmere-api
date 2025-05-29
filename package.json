@@ -17,6 +17,10 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.79.0",
+    "@trpc/client": "^11.1.4",
+    "@trpc/server": "^11.1.4",
+    "@trpc/tanstack-react-query": "^11.1.4",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "bun-plugin-tailwind": "^0.0.15",

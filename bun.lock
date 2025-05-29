@@ -4,6 +4,10 @@
     "": {
       "name": "yeastmode",
       "dependencies": {
+        "@tanstack/react-query": "^5.79.0",
+        "@trpc/client": "^11.1.4",
+        "@trpc/server": "^11.1.4",
+        "@trpc/tanstack-react-query": "^11.1.4",
         "@types/react": "^19.1.4",
         "@types/react-dom": "^19.1.5",
         "bun-plugin-tailwind": "^0.0.15",
@@ -109,6 +113,16 @@
     "@libsql/win32-x64-msvc": ["@libsql/win32-x64-msvc@0.5.11", "", { "os": "win32", "cpu": "x64" }, "sha512-NES0P2pyx5XjveTYotTG03eoJwx0haJBYWXfqmcPLmbQ5u03Qmd7rxhLfWDdIRj4PrdhVProwdB0FA82ryLcKQ=="],
 
     "@neon-rs/load": ["@neon-rs/load@0.0.4", "", {}, "sha512-kTPhdZyTQxB+2wpiRcFWrDcejc4JI6tkPuS7UZCG4l6Zvc5kU/gGQ/ozvHTh1XR5tS+UlfAfGuPajjzQjCiHCw=="],
+
+    "@tanstack/query-core": ["@tanstack/query-core@5.79.0", "", {}, "sha512-s+epTqqLM0/TbJzMAK7OEhZIzh63P9sWz5HEFc5XHL4FvKQXQkcjI8F3nee+H/xVVn7mrP610nVXwOytTSYd0w=="],
+
+    "@tanstack/react-query": ["@tanstack/react-query@5.79.0", "", { "dependencies": { "@tanstack/query-core": "5.79.0" }, "peerDependencies": { "react": "^18 || ^19" } }, "sha512-DjC4JIYZnYzxaTzbg3osOU63VNLP67dOrWet2cZvXgmgwAXNxfS52AMq86M5++ILuzW+BqTUEVMTjhrZ7/XBuA=="],
+
+    "@trpc/client": ["@trpc/client@11.1.4", "", { "peerDependencies": { "@trpc/server": "11.1.4", "typescript": ">=5.7.2" } }, "sha512-QDaIdwhZlHKMhDAr5m4dJNAYkX4ydo63Up0M01mGcdpnOOmGlvGMRWzdVSLIvGc1JasPSvC15RsgrjMzXpElzw=="],
+
+    "@trpc/server": ["@trpc/server@11.1.4", "", { "peerDependencies": { "typescript": ">=5.7.2" } }, "sha512-X3TSLwQQh5+zi+yY7BnnmUUwVNdeBj3BAt580sAJ+Qd5PvDhz1gSNHGOAlOLulCFn6g/JHf8n+DbnPF/Gb63SA=="],
+
+    "@trpc/tanstack-react-query": ["@trpc/tanstack-react-query@11.1.4", "", { "peerDependencies": { "@tanstack/react-query": "^5.67.1", "@trpc/client": "11.1.4", "@trpc/server": "11.1.4", "react": ">=18.2.0", "react-dom": ">=18.2.0", "typescript": ">=5.7.2" } }, "sha512-q4BE8Qi8qq+2Z1lzjR39+33NwphBXd0t/zeayTlgl/OUmHmmZ/v3DcOqLfL1GcNl/Jc+qE/9lc6U/WDoaMyXyw=="],
 
     "@types/bun": ["@types/bun@1.2.13", "", { "dependencies": { "bun-types": "1.2.13" } }, "sha512-u6vXep/i9VBxoJl3GjZsl/BFIsvML8DfVDO0RYLEwtSZSp981kEO1V5NwRcO1CPJ7AmvpbnDCiMKo3JvbDEjAg=="],
 
