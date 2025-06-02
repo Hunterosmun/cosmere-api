@@ -15,10 +15,7 @@ export const series = () => [
   { name: 'Stormlight Archive' },
 ]
 
-export const books = (
-  planets: (typeof schema.planets.$inferInsert)[],
-  series: (typeof schema.series.$inferInsert)[]
-) => [
+export const books = (planets: schema.Planet[], series: schema.Series[]) => [
   {
     name: 'The Final Empire',
     releaseDate: new Date('2006-07-17'),

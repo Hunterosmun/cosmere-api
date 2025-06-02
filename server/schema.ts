@@ -45,3 +45,7 @@ export const seriesRelations = relations(series, ({ many }) => ({
 export const planetsRelations = relations(planets, ({ many }) => ({
   booksPrimarilySetOn: many(books),
 }))
+
+export type Book = typeof books.$inferInsert
+export type Planet = typeof planets.$inferInsert
+export type Series = typeof series.$inferInsert
