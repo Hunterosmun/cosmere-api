@@ -8,3 +8,9 @@ export async function listBooks() {
 export async function listPlanets() {
   return db.query.planets.findMany()
 }
+
+export async function getBookById(id: number) {
+  return db.query.books.findFirst({
+    where: (table, { eq }) => eq(table.id, id),
+  })
+}
