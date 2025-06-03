@@ -1,12 +1,22 @@
 import indexHTML from '../client/index.html'
 import { PORT } from './config'
 import * as service from './service'
+import * as schema from './schema'
 
 const server = Bun.serve({
   port: PORT,
   routes: {
     '/*': indexHTML,
-    '/api/books': async () => {
+    '/api': async (req) => {
+      return Response.json({
+        links: {
+          books: new URL('/api/books', req.url),
+          planets: new URL('/api/planets', req.url),
+          series: new URL('/api/series', req.url),
+        },
+      })
+    },
+    '/api/books': async (req) => {
       const books = await service.listBooks()
       const results = books.map((book) => addBookLinks(book, req))
       return Response.json({ results })
@@ -34,6 +44,30 @@ const server = Bun.serve({
       const results = addPlanetLinks(planet, req)
       return Response.json({ results })
     },
+    '/api/planets/:id/booksPrimarilySetOn': async (req) => {
+      const id = Number.parseInt(req.params.id, 10)
+      const books = await service.listBooksByPrimaryPlanet(id)
+      const results = books.map((book) => addBookLinks(book, req))
+      return Response.json({ results })
+    },
+    '/api/series': async (req) => {
+      const series = await service.listSeries()
+      const results = series.map((series) => addSeriesLinks(series, req))
+      return Response.json({ results })
+    },
+    '/api/series/:id': async (req) => {
+      const id = Number.parseInt(req.params.id, 10)
+      const series = await service.getSeriesById(id)
+      if (!series) {
+        return Response.json({ error: 'Series not found' }, { status: 404 })
+      }
+      const results = addSeriesLinks(series, req)
+      return Response.json({ results })
+    },
+    '/api/series/:id/books': async (req) => {
+      const id = Number.parseInt(req.params.id, 10)
+      const books = await service.listBooksBySeries(id)
+      const results = books.map((book) => addBookLinks(book, req))
       return Response.json({ results })
     },
   },

@@ -11,26 +11,33 @@ export async function getBookById(id: number) {
 }
 
 export async function listPlanets() {
-  return db.query.planets.findMany({
-    with: {
-      booksPrimarilySetOn: {
-        columns: {
-          id: true,
-        },
-      },
-    },
-  })
+  return db.query.planets.findMany({})
 }
 
 export async function getPlanetById(id: number) {
   return db.query.planets.findFirst({
     where: (table, { eq }) => eq(table.id, id),
-    with: {
-      booksPrimarilySetOn: {
-        columns: {
-          id: true,
-        },
-      },
-    },
+  })
+}
+
+export async function listBooksByPrimaryPlanet(id: number) {
+  return db.query.books.findMany({
+    where: (table, { eq }) => eq(table.primaryPlanetId, id),
+  })
+}
+
+export async function listSeries() {
+  return db.query.series.findMany({})
+}
+
+export async function getSeriesById(id: number) {
+  return db.query.series.findFirst({
+    where: (table, { eq }) => eq(table.id, id),
+  })
+}
+
+export async function listBooksBySeries(id: number) {
+  return db.query.books.findMany({
+    where: (table, { eq }) => eq(table.seriesId, id),
   })
 }
