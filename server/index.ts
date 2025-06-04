@@ -2,11 +2,13 @@ import indexHTML from '../client/index.html'
 import { PORT } from './config'
 import * as service from './service'
 import * as schema from './schema'
+import openAPI from './openapi.json' with { type: 'json' }
 
 const server = Bun.serve({
   port: PORT,
   routes: {
     '/*': indexHTML,
+    '/openapi.json': Response.json(openAPI),
     '/api': async (req) => {
       return Response.json({
         links: {

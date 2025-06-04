@@ -1,0 +1,64 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Cosmere API",
+    "description": "API for Brandon Sanderson's Cosmere",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/books": {
+      "get": {
+        "tags": ["Books"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookList"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "releaseDate": {
+            "type": "string"
+          },
+          "seriesId": {
+            "type": "number",
+            "nullable": true
+          },
+          "primaryPlanetId": {
+            "type": "number",
+            "nullable": true
+          }
+        }
+      },
+      "BookList": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Book"
+            }
+          }
+        }
+      }
+    }
+  }
+}
