@@ -17,7 +17,10 @@ const server = Bun.serve({
       })
     },
     '/api/books': async (req) => {
-      const books = await service.listBooks()
+      const url = new URL(req.url)
+      const books = await service.listBooks({
+        search: url.searchParams.get('search'),
+      })
       const results = books.map((book) => addBookLinks(book, req))
       return Response.json({ results })
     },
@@ -31,7 +34,10 @@ const server = Bun.serve({
       return Response.json({ results })
     },
     '/api/planets': async (req) => {
-      const planets = await service.listPlanets()
+      const url = new URL(req.url)
+      const planets = await service.listPlanets({
+        search: url.searchParams.get('search'),
+      })
       const results = planets.map((planet) => addPlanetLinks(planet, req))
       return Response.json({ results })
     },
@@ -46,12 +52,18 @@ const server = Bun.serve({
     },
     '/api/planets/:id/booksPrimarilySetOn': async (req) => {
       const id = Number.parseInt(req.params.id, 10)
-      const books = await service.listBooksByPrimaryPlanet(id)
+      const url = new URL(req.url)
+      const books = await service.listBooksByPrimaryPlanet(id, {
+        search: url.searchParams.get('search'),
+      })
       const results = books.map((book) => addBookLinks(book, req))
       return Response.json({ results })
     },
     '/api/series': async (req) => {
-      const series = await service.listSeries()
+      const url = new URL(req.url)
+      const series = await service.listSeries({
+        search: url.searchParams.get('search'),
+      })
       const results = series.map((series) => addSeriesLinks(series, req))
       return Response.json({ results })
     },
@@ -66,7 +78,10 @@ const server = Bun.serve({
     },
     '/api/series/:id/books': async (req) => {
       const id = Number.parseInt(req.params.id, 10)
-      const books = await service.listBooksBySeries(id)
+      const url = new URL(req.url)
+      const books = await service.listBooksBySeries(id, {
+        search: url.searchParams.get('search'),
+      })
       const results = books.map((book) => addBookLinks(book, req))
       return Response.json({ results })
     },

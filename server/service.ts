@@ -1,7 +1,12 @@
 import { db } from './db'
 
-export async function listBooks() {
-  return db.query.books.findMany({ with: { series: true } })
+export async function listBooks({ search }: { search?: string | null } = {}) {
+  return db.query.books.findMany({
+    where: (table, { like }) => {
+      return search ? like(table.name, `%${search}%`) : undefined
+    },
+    with: { series: true },
+  })
 }
 
 export async function getBookById(id: number) {
@@ -10,8 +15,12 @@ export async function getBookById(id: number) {
   })
 }
 
-export async function listPlanets() {
-  return db.query.planets.findMany({})
+export async function listPlanets({ search }: { search?: string | null } = {}) {
+  return db.query.planets.findMany({
+    where: (table, { like }) => {
+      return search ? like(table.name, `%${search}%`) : undefined
+    },
+  })
 }
 
 export async function getPlanetById(id: number) {
@@ -20,14 +29,24 @@ export async function getPlanetById(id: number) {
   })
 }
 
-export async function listBooksByPrimaryPlanet(id: number) {
+export async function listBooksByPrimaryPlanet(
+  id: number,
+  { search }: { search?: string | null } = {}
+) {
   return db.query.books.findMany({
-    where: (table, { eq }) => eq(table.primaryPlanetId, id),
+    where: (table, { eq, and, like }) => {
+      const idQuery = eq(table.primaryPlanetId, id)
+      return search ? and(idQuery, like(table.name, `%${search}%`)) : idQuery
+    },
   })
 }
 
-export async function listSeries() {
-  return db.query.series.findMany({})
+export async function listSeries({ search }: { search?: string | null } = {}) {
+  return db.query.series.findMany({
+    where: (table, { like }) => {
+      return search ? like(table.name, `%${search}%`) : undefined
+    },
+  })
 }
 
 export async function getSeriesById(id: number) {
@@ -36,8 +55,14 @@ export async function getSeriesById(id: number) {
   })
 }
 
-export async function listBooksBySeries(id: number) {
+export async function listBooksBySeries(
+  id: number,
+  { search }: { search?: string | null } = {}
+) {
   return db.query.books.findMany({
-    where: (table, { eq }) => eq(table.seriesId, id),
+    where: (table, { eq, and, like }) => {
+      const idQuery = eq(table.seriesId, id)
+      return search ? and(idQuery, like(table.name, `%${search}%`)) : idQuery
+    },
   })
 }
